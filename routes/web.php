@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Recipe;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', ['recipes' => Recipe::all()]);
 })->name('dashboard');
 
 
