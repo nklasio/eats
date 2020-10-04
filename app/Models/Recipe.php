@@ -9,6 +9,8 @@ class Recipe extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name', 'description', 'user_id'];
+
     protected $with = array('ingredients', 'steps');
 
     public function author() {
@@ -21,5 +23,10 @@ class Recipe extends Model
 
     public function steps(){
         return $this->hasMany(Step::class);
+    }
+
+    public function addIngredient($ingredientName, $quantity, $quantityType) {
+        $ingredient = Ingredient::firstOrCreate(['name' => $ingredientName]);
+        $this->ingredients()->attach($ingredient, ['quantity' => $quantity, 'quantity_type' => $quantityType]);
     }
 }

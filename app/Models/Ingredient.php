@@ -9,7 +9,13 @@ class Ingredient extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function recipes() {
         return $this->belongsToMany(Recipe::class)->withPivot('quantity', 'quantity_type');
+    }
+
+    static function search($query) {
+        return static::where('name', 'like', '%'.$query.'%')->get();
     }
 }
