@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
+        <div class="flex justify-between items-baseline">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
+
+        <a href="{{ route('recipe.create') }}" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+            {{ __('New Recipe') }}
+        </a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -62,6 +68,7 @@
 
 
                     @empty
+                        <h2>No recipes found</h2>
 
                     @endforelse
                 </div>

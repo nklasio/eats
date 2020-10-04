@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\CreateRecipe;
 use App\Models\Recipe;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard', ['recipes' => Recipe::all()]);
 })->name('dashboard');
 
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function() {
+    Route::get('recipe/create', CreateRecipe::class)->name('recipe.create');
+});
 
 Route::get('debug-sentry', function() {
     throw new Exception("Sentry test exception");
